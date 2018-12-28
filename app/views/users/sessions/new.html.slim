@@ -1,0 +1,17 @@
+.container.width__40
+  .row
+    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'col s12 user_login'}) do |f|
+      h4 Login
+      .row
+        .signup__fields.input-field.col.s12
+          = f.email_field :email, id: 'userEmail.', class: 'validate'
+          = f.label :username, data: { error: "can't be blank" }
+      .row
+        .signup__fields.input-field.col.s12
+          = f.password_field :password, id: 'userPassword.', class: 'validate', autocomplete: "off", autocorrect: "off", autocapitalize: "off", spellcheck: "false"
+          = f.label :password, data: { error: "can't be blank" }
+      .row
+        .login__btn.input-field.col.s12.center-align
+          = f.submit 'login', class: ' btn'
+      .row
+        = render "users/shared/links"

@@ -1,0 +1,24 @@
+.comments.card-panel
+  .row.user-info.valign-wrapper
+    .avatar.col.s2
+      = link_to image_tag(url_for(comment.user.image), height: 45, width: 45, class: 'circle'), comment.user
+      / - if comment.user.image
+      /   = link_to comment.user.image, comment.user
+      / - else
+      /   = link_to image_tag('/assets/default-avatar.jpg', height: 45, width: 45, class: 'circle'), comment.user
+    
+    .comment-info.left.col.s8
+      span.user-name
+        = link_to comment.user.name, comment.user
+      br
+      span.comment
+        = comment.content
+      br
+      span.posted-time
+        = time_ago(comment.created_at)
+    br
+    .comment-actions.col.s2
+      - if current_user == comment.user or current_user.admin?
+        span.right.destroy
+          = link_to post_comment_path(comment.commentable, comment), method: :delete, class: 'red-text', data: { confirm: "Are you sure, you want to delete?" } do
+            i.tooltipped.fas.fa-trash data-position='top' data-tooltip='Delete Comment'

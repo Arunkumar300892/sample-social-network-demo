@@ -1,0 +1,59 @@
+.card-panel.hoverable
+  .post-info
+    .row.user-info.valign-wrapper
+      .avatar.col.s2
+        = link_to image_tag(post.user.image, height: 45, width: 45, class: 'circle'), post.user
+      .post-info.col.s8
+        span.user-name
+          = link_to post.user.name, post.user
+        br
+        span.posted-time
+          = time_ago(post.created_at)
+      .post-actions.col.s2
+        - unless params[:controller] == 'dashboard'
+          - if current_user == post.user or current_user.admin?
+            span.right.destroy
+              = link_to post, method: :delete, class: 'red-text', data: { confirm: "Are you sure, you want to delete?" } do
+                i.tooltipped.fas.fa-trash data-position='top' data-tooltip='Delete Post'
+  
+  .content
+    span = post.content
+  br
+  .image
+    - if post.avatar_attached?
+      - watermark_image = '/assets/watermark.png'
+      = cl_image_tag(post.avatar.url, class: 'responsive-img materialboxed', overlay: watermark_image,
+             gravity: :south_east, x: 5, y: 5, data: {caption: post.content})
+  br
+  .counts
+    span.likes_count
+      = count_with_text(post.likes_count, 'Like')
+    span &nbsp;
+    span.right.tooltipped.comments_count.comments-toggler.cursor-pointer data-postid="post#{post.id}" data-position='top' data-tooltip='Click to View Comments'
+      = count_with_text(post.comments_count, 'Comment')
+  hr
+  - unless params[:controller] == 'dashboard'
+    .likes-comments
+      span.pre-like
+        - pre_like = like_unlike(post, current_user)
+        - if pre_like
+          = link_to post_like_path(post, pre_like), method: :delete do
+            span.tooltipped.far.fa-thumbs-down data-position='top' data-tooltip='Unlike'
+        - else
+          = link_to post_likes_path(post), method: :post do
+            span.tooltipped.far.fa-thumbs-up.2x data-position='top' data-tooltip='Like'
+      span &nbsp;
+      span.comments.cursor-pointer
+        i.tooltipped.far.fa-comments.commentForm-toggler data-position='top' data-tooltip='Comment' data-postid="post#{post.id}"
+
+  .row.card-panel.comment-form id="post#{post.id}-comment-form"
+    = form_for [post, Comment.new], class: "col s12" do |f|
+      .row
+        .input-field.col.s8
+          = f.text_area :content, placeholder: "Add a comment", class: 'materialize-textarea'
+        .submit-btn.col.s2
+          = f.submit "Post Comment", class: "btn-small"
+  
+  .comments-section id="post#{post.id}-comments"
+    ul.collection
+      = render partial: 'comments/comment', collection: post.comments

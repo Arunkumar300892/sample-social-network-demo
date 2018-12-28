@@ -1,0 +1,18 @@
+- users.each_with_index do |user, index|
+  tr
+    td
+      .index= (index + 1).to_s + '.'
+    td
+      .name= user.name
+    td
+      .status
+        - if user.online?
+          i.fas.fa-circle.green-text
+        - else
+          i.fas.fa-circle.red-text
+    td
+      .posts= user.posts.count
+    td
+      .likes= user.likes.count
+    td
+      .comments= user.comments.count

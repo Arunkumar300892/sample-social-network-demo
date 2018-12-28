@@ -1,0 +1,17 @@
+.row
+  = form_with model: @post, class: "col s12", id: 'postForm' do |f|
+    .row
+      .input-field.col.s12
+        i.far.fa-comment.prefix
+        = f.text_area :content, placeholder: "What's on your mind ?.", class: "materialize-textarea"
+
+      .file-field.input-field.col.s12
+        .btn
+          i.fas.fa-image
+          span &nbsp; Photo
+          = f.file_field :avatar, accept: 'image/jpeg,image/gif,image/png', id: "post_picture"
+        .file-path-wrapper
+          input.file-path.file-path-text.validate type="text"
+    .row
+      .submit-btn.center
+        = f.submit "Post", class: "btn btn-primary"

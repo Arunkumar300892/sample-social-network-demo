@@ -1,0 +1,18 @@
+.container.width__40
+  .row
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+      = devise_error_messages!
+      h4 Reset Your Password?
+      = f.hidden_field :reset_password_token
+
+      .row
+        .signup__fields.input-field.col.s12
+          = f.password_field :password, id: 'userPassword', class: 'validate', autofocus: true, autocomplete: "off"
+          = f.label :password, "New password", data: { error: "can't be blank" }
+      .row
+        .signup__fields.input-field.col.s12
+          = f.password_field :password_confirmation, id: 'userPassword1', class: 'validate', autofocus: true, autocomplete: "off"
+          = f.label :password_confirmation, "New password", data: { error: "can't be blank" }
+      .row
+        .login__btn.input-field.col.s12.center-align
+          = f.submit 'RESET PASSWORD', class: ' btn'

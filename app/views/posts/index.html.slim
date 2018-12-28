@@ -1,0 +1,9 @@
+.row
+  .col.l3
+  .col.l6.s12
+    .row.card-panel
+      = render 'form'
+    .row
+      .card-panel.col-md-8.post-feed
+        = render partial: 'posts', locals: { posts: @posts }
+  .col.l3

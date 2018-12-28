@@ -1,0 +1,21 @@
+- if user_signed_in?
+  li
+    = link_to 'Dashboard', dashboard_index_path
+  li
+    = link_to current_user.name, user_path(current_user)
+
+  li
+    = link_to destroy_user_session_path, method: :delete do
+      i.fas.fa-sign-out-alt
+      | &nbsp; LOGOUT
+- else
+  li
+    = link_to new_user_registration_path do
+      i.fa.fa-user-plus
+      | &nbsp; SIGN UP
+  li
+    = link_to new_user_session_path do
+      i.fas.fa-sign-in-alt
+      | &nbsp; LOGIN
+
+

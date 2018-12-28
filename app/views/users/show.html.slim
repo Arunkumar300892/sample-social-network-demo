@@ -1,0 +1,22 @@
+.row
+  .col.l3
+  .col.l6.s12
+    .card-panel.hoverable
+      .row
+        h5 Your Profile
+      .row
+        .avatgar.col.s2
+          = image_tag @user.image, width: '100px', height: '100px', class: 'circle'
+        .user-info.col.s3
+          span.user-name = @user.name
+          br
+          span.user-name = @user.email
+        .right
+          = link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-primary'
+    hr
+    .card-panel
+      - if @user.posts.any?
+        h3 Your Posts
+        ol.posts
+          = render @user.posts
+  .col.l3

@@ -1,0 +1,59 @@
+.container
+  .row
+    .col.s12.m6.l3
+      .card
+        .card-content.green.white-text.center
+          p.card-stats-title
+            | No. of Users
+          h4.card-stats-number
+            = @users.count
+    .col.s12.m6.l3
+      .card
+        .card-content.blue.darken-2.white-text.center
+          p.card-stats-title
+            | No. Of Posts
+          h4.card-stats-number
+            = @posts.count
+    .col.s12.m6.l3
+      .card
+        .card-content.blue-grey.white-text.center
+          p.card-stats-title
+            | Total Likes
+          h4.card-stats-number
+            = @comments_count
+    .col.s12.m6.l3
+      .card
+        .card-content.purple.white-text.center
+          p.card-stats-title
+            | Total Comments
+          h4.card-stats-number
+            = @likes_count
+  hr
+
+  .row
+    .col.s5.most-liked-post.card-panel
+      h5 Most Liked Post
+      = render partial: 'posts/post', locals: { post: @posts.max_by(&:likes_count) }
+    .col.s2
+    .col.s5.most-commented-post.card-panel
+      h5 Most Commented Post
+      = render partial: 'posts/post', locals: { post: @posts.max_by(&:comments_count) }
+  hr
+
+  .row
+    .users__list
+      table.responsive-table.bordered.highlight.users__list-table
+        thead.text-bold
+          td Sl.no
+          td
+            | Users &nbsp;
+          td
+            | Status &nbsp;
+          td
+            | No. of Posts &nbsp;
+          td
+            | No. of Likes &nbsp;
+          td
+            | No. of Comments &nbsp;
+        tbody.users_list id="users__list"
+          = render partial: 'users_list', locals: { users: @users.order("updated_at desc") }

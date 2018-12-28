@@ -1,0 +1,12 @@
+.navbar-fixed
+  nav
+    .nav-wrapper.grey.darken-3
+      a.brand-logo href="#!"  Social Networking
+      a.sidenav-trigger data-target="mobile-menu" href="#"
+        i.material-icons menu
+      
+      ul.right.hide-on-med-and-down
+        = render partial: 'layouts/navbar_links'
+      
+ul#mobile-menu.sidenav
+  = render partial: 'layouts/navbar_links'
