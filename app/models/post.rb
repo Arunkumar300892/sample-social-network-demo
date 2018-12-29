@@ -16,11 +16,7 @@ class Post < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
 
   def avatar_attached?
-    if self.avatar.present?
-      return true
-    else
-      return false
-    end
+    self.avatar.present?
   end
 
 end

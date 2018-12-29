@@ -3,8 +3,8 @@ class User < ApplicationRecord
   # Devise modules
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :confirmable, :lockable, :timeoutable, :trackable,
-         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+         :timeoutable, :trackable, :omniauthable,
+         omniauth_providers: [:facebook, :google_oauth2]
 
   # mounting uploader for image
   mount_uploader :avatar, AvatarUploader
@@ -34,10 +34,6 @@ class User < ApplicationRecord
       user.last_name = auth.info.last_name
       user.skip_confirmation!
     end
-  end
-
-  def feed
-    Post.where("user_id = ?", id)
   end
 
   # to get the user avatar
