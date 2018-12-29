@@ -58,7 +58,7 @@ gem 'omniauth-facebook', '~> 4.0'
 gem 'omniauth-google-oauth2', '~> 0.4.1'
 
 # Use Cloudinary for Image management
-gem 'cloudinary', require: false
+gem 'cloudinary'
 
 # for image upload and optimization
 gem 'carrierwave', '~> 1.0'

@@ -39,11 +39,12 @@ class User < ApplicationRecord
   # to get the user avatar
   def image
     if self.avatar.present?
-      self.avatar.url
+      self.avatar.filename
     else
-      "/assets/default-avatar.jpg"
+      "default-avatar.jpg"
     end
   end
+  
   # to get full name
   def name
     [self.first_name, self.last_name].join(' ')

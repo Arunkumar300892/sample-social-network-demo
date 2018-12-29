@@ -2,7 +2,7 @@
   .post-info
     .row.user-info.valign-wrapper
       .avatar.col.s2
-        = link_to image_tag(post.user.image, height: 45, width: 45, class: 'circle'), post.user
+        = user_avatar(post.user.image)
       .post-info.col.s8
         span.user-name
           = link_to post.user.name, post.user
@@ -21,9 +21,7 @@
   br
   .image
     - if post.avatar_attached?
-      - watermark_image = '/assets/watermark.png'
-      = cl_image_tag(post.avatar.url, class: 'responsive-img materialboxed', overlay: watermark_image,
-             gravity: :south_east, x: 5, y: 5, data: {caption: post.content})
+      = cl_image_tag(post.image, class: 'responsive-img materialboxed', data: {caption: post.content})
   br
   .counts
     span.likes_count

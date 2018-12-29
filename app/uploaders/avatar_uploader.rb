@@ -24,6 +24,12 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   # Process files as they are uploaded:
   # process scale: [200, 300]
+  process :watermark
+
+  def watermark
+    name = Rails.application.credentials.watermark
+    return :transformation=> [{ overlay: { font_family: 'Times', font_size: 30, font_style: 'italic', font_weight: 'bold', text: "© #{name}"},gravity: "south_east", x: 5, y: 5, color: '#ffffff', opacity: '90'}]
+  end
   #
   # def scale(width, height)
   #   # do something

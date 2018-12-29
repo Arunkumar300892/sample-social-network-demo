@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :dashboard, only: [:index]
+  get '/home', to: "home#index"
 
   # Root route
   root "posts#index"

@@ -15,8 +15,14 @@ class Post < ApplicationRecord
   # scope
   default_scope -> { order(created_at: :desc) }
 
+  # to check image attached
   def avatar_attached?
     self.avatar.present?
+  end
+
+  # to return the image name
+  def image
+    self.avatar.filename
   end
 
 end
