@@ -12,11 +12,25 @@
           br
           span.user-name = @user.email
         .right
-          = link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-primary'
+          - if current_user == @user
+            = link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-primary'
     hr
     .card-panel
       - if @user.posts.any?
-        h3 Your Posts
+        - if current_user == @user
+          h3 Your Posts
+        - else
+          h3 = "#{@user.first_name} Posts"
         ol.posts
           = render @user.posts
+      - else
+        - if current_user == @user
+          h5.center 
+            span No Posts to show. Click  
+            span = link_to 'here', posts_path
+            span  to post one.
+        - else
+          h5.center
+            span = @user.first_name
+            span  has not posted anything.
   .col.l3

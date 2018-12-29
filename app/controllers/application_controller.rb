@@ -13,27 +13,25 @@ class ApplicationController < ActionController::Base
     posts_path || root_path
   end
 
+  def after_sign_out_path_for(resource)
+    new_user_session_path
+  end
+
   def configure_permitted_parameters
     added_attr = [
       :first_name, :last_name, :email, :password
     ]
+
     devise_parameter_sanitizer.permit(:sign_up) do |u|
-      u.permit(
-        added_attr,
-        :password
-      )
+      u.permit( added_attr, :password, :provider, :uid)
     end
 
     devise_parameter_sanitizer.permit(:sign_in) do |u|
-      u.permit(:email, :password, :remember_me)
+      u.permit(:email, :password, :remember_me, :provider, :uid)
     end
     
     devise_parameter_sanitizer.permit(:account_update) do |u|
-      u.permit(
-        added_attr,
-        :current_password,
-        :avatar
-      )
+      u.permit(added_attr, :current_password, :avatar)
     end
   end
 

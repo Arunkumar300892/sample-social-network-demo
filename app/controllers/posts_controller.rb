@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-    before_action :signed_in?, only: [:create, :destroy]
-    before_action :post_owner?,   only: :destroy
+    before_action :signed_in?
+    before_action :post_owner?, only: :destroy
 
     helper ApplicationHelper
     
